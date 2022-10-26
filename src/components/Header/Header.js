@@ -11,7 +11,13 @@ import logo from '../../images/logo.png';
 import './Header.css';
 
 const Header = () => {
-    const { user } = useContext(AuthContext);
+    const { user, logout } = useContext(AuthContext);
+    const logoutUser = () => {
+        logout()
+            .then(() => { })
+            .catch(error => console.log(error))
+    }
+
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
@@ -35,7 +41,7 @@ const Header = () => {
                         {
                             user?.uid ?
                                 <div>
-                                    <Link>
+                                    <Link data-toggle="tooltip" data-placement="top" title={user.displayName}>
                                         {
                                             user?.photoURL ?
                                                 <Image src={user.photoURL} roundedCircle style={{ height: '35px' }}></Image>
@@ -43,7 +49,7 @@ const Header = () => {
                                                 <FaUser></FaUser>
                                         }
                                     </Link>
-                                    <Button className='mx-3' variant="secondary" size="sm">
+                                    <Button onClick={logoutUser} className='mx-3' variant="secondary" size="sm">
                                         Logout
                                     </Button>
                                 </div>

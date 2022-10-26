@@ -1,12 +1,17 @@
 import React from 'react';
+import { useContext } from 'react';
+import { Button, Image } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { FaUser } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthProvider';
 import logo from '../../images/logo.png';
 import './Header.css';
 
 const Header = () => {
+    const { user } = useContext(AuthContext);
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
@@ -26,9 +31,27 @@ const Header = () => {
                         <Link to={'/faq'}>FAQ</Link>
                         <Link to={'/blog'}>Blog</Link>
                     </Nav>
-                    <Nav>
-                        <Link>User Photo</Link>
-                        <Link>Login</Link>
+                    <Nav className='d-flex align-items-center'>
+                        {
+                            user?.uid ?
+                                <div>
+                                    <Link>
+                                        {
+                                            user?.photoURL ?
+                                                <Image src={user.photoURL} roundedCircle style={{ height: '35px' }}></Image>
+                                                :
+                                                <FaUser></FaUser>
+                                        }
+                                    </Link>
+                                    <Button className='mx-3' variant="secondary" size="sm">
+                                        Logout
+                                    </Button>
+                                </div>
+                                :
+                                <div>
+                                    <Link to={'/login'}>Login</Link>
+                                </div>
+                        }
                         <Link>Dark Mode</Link>
                     </Nav>
                 </Navbar.Collapse>

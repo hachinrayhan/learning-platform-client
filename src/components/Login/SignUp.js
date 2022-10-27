@@ -3,12 +3,14 @@ import { useState } from 'react';
 import { useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 
 const SignUp = () => {
-    const [message, setMessage] = useState('');
+    const [error, setError] = useState('');
     const { createUser, updateUserProfile, setLoading } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -18,7 +20,7 @@ const SignUp = () => {
         const profile = { displayName: name, photoURL: photoURL }
         const email = form.email.value;
         const password = form.password.value;
-        setMessage('');
+        setError('');
 
         createUser(email, password)
             .then(result => {
@@ -27,14 +29,15 @@ const SignUp = () => {
                 updateUserProfile(profile)
                     .then(() => { console.log('updated user') })
                     .catch(error => {
-                        setMessage(error.message);
+                        setError(error.message);
                     })
-                setMessage('Congrats! Signup Successful');
+                toast.success('Congrats! Signup Successful');
                 form.reset();
+                navigate('/');
             })
             .catch(error => {
                 console.error(error);
-                setMessage(error.message);
+                setError(error.message);
             })
             .finally(() => {
                 setLoading(false);
@@ -61,7 +64,7 @@ const SignUp = () => {
                 <Form.Control name='password' type="password" placeholder="Password" required />
             </Form.Group>
             <Form.Text className="text-muted">
-                <p className='text-warning'>{message}</p>
+                <p className='text-warning'>{error}</p>
             </Form.Text>
             {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
                 <Form.Check

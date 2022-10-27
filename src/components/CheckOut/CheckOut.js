@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card, Container, ListGroup } from 'react-bootstrap';
+import { Button, Card, Container } from 'react-bootstrap';
 import { Link, useLoaderData } from 'react-router-dom';
 
 const CheckOut = () => {

@@ -3,13 +3,17 @@ import { useState } from 'react';
 import { useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 
 
 const EmailLogin = () => {
     const { login } = useContext(AuthContext);
-    const [message, setMessage] = useState('');
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -17,18 +21,19 @@ const EmailLogin = () => {
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password);
-        setMessage('');
+        setError('');
 
         login(email, password)
             .then(result => {
                 const user = result.user;
                 console.log(user);
-                setMessage('Congrats! Login Successful');
+                toast.success('Congrats! Login Successful');
                 form.reset();
+                navigate(from, { replace: true });
             })
             .catch(error => {
                 console.error(error);
-                setMessage(error.message);
+                setError(error.message);
             })
     }
     return (
@@ -43,7 +48,7 @@ const EmailLogin = () => {
                 <Form.Control name='password' type="password" placeholder="Password" required />
             </Form.Group>
             <Form.Text className="text-muted">
-                <p className='text-warning'>{message}</p>
+                <p className='text-warning'>{error}</p>
             </Form.Text>
             {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
                 <Form.Check

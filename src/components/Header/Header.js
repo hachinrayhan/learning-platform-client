@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import { useContext } from 'react';
 import { Button, Image } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
@@ -12,6 +13,12 @@ import './Header.css';
 
 const Header = () => {
     const { user, logout } = useContext(AuthContext);
+    const [dark, setDark] = useState(true);
+
+    const toggle = () => {
+        setDark(!dark)
+    }
+
     const logoutUser = () => {
         logout()
             .then(() => { })
@@ -37,7 +44,7 @@ const Header = () => {
                         <Link to={'/faq'}>FAQ</Link>
                         <Link to={'/blog'}>Blog</Link>
                     </Nav>
-                    <Nav className='d-flex align-items-center'>
+                    <Nav className='d-flex align-items-center nav-item'>
                         {
                             user?.uid ?
                                 <div>
@@ -58,7 +65,7 @@ const Header = () => {
                                     <Link to={'/login'}>Login</Link>
                                 </div>
                         }
-                        <Link>Dark Mode</Link>
+                        <Button onClick={toggle}>{dark ? 'Light Mode' : 'Dark Mode'}</Button>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

@@ -5,14 +5,16 @@ import { Button, ButtonGroup } from 'react-bootstrap';
 import toast from 'react-hot-toast';
 import { FaGoogle, FaGithub } from 'react-icons/fa';
 import { TbMail } from 'react-icons/tb'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 
 const Login = () => {
-    const { googleProviderLogin, githubProviderLogin } = useContext(AuthContext);
+    const { googleProviderLogin, githubProviderLogin, setLoading } = useContext(AuthContext);
     const googleProvider = new GoogleAuthProvider();
     const githubProvider = new GithubAuthProvider();
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
     const googleLogin = () => {
         googleProviderLogin(googleProvider)
@@ -20,10 +22,13 @@ const Login = () => {
                 const user = result.user;
                 console.log(user);
                 toast.success('Congrats! Login Successful');
-                navigate('/');
+                navigate(from, { replace: true });
             })
             .catch(error => {
                 console.error(error);
+            })
+            .finally(() => {
+                setLoading(false);
             })
     }
 
@@ -33,10 +38,13 @@ const Login = () => {
                 const user = result.user;
                 console.log(user);
                 toast.success('Congrats! Login Successful');
-                navigate('/');
+                navigate(from, { replace: true });
             })
             .catch(error => {
                 console.error(error);
+            })
+            .finally(() => {
+                setLoading(false);
             })
     }
 

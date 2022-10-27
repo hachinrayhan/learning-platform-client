@@ -6,7 +6,7 @@ import photo3 from '../../images/photo3.png';
 
 const Home = () => {
     return (
-        <Carousel>
+        <Carousel className='container'>
             <Carousel.Item>
                 <img
                     className="d-block w-100"

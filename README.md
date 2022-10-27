@@ -1,10 +1,10 @@
 Project Name: Test Prep
 
-Live Site Link: 
+Live Site Link: https://learning-platform-a10.web.app/
 
 Features and Functionalities:
 -------------------------------
-i) It is an educational website to which offers some courses on internationally recognized tests.
+i) It is an educational website which offers some courses on internationally recognized tests.
 ii) You can see the details about the course by tapping the 'Details' button.
 iii) You can get premium access if you are logged in.
 iv) There are three different login systems, Google, Github and Email-Password login.
@@ -17,5 +17,5 @@ List of Technologies used in this project:
 3) React Router
 4) React Icons
 5) React hot toast
-6) Expressjs.com
+6) Expressjs
 7) Firebase

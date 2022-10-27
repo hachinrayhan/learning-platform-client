@@ -1,0 +1,9 @@
+.course-name a {
+    text-decoration: none;
+}
+
+.course-name h5 {
+    border: 2px solid lightslategray;
+    padding: 20px;
+    margin-bottom: 20px;
+}

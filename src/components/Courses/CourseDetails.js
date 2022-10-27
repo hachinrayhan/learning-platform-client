@@ -8,11 +8,11 @@ import { Container } from 'react-bootstrap';
 
 const CourseDetails = () => {
     const course = useLoaderData();
-    const { name, creator, image, learnings } = course;
+    const { id, name, creator, image, learnings } = course;
     return (
         <Container className='my-5'>
             <h1>{course.name} <Button><FaDownload></FaDownload></Button></h1>
-            <Card className='w-50 mx-auto'>
+            <Card className='w-75 mx-auto'>
                 <Card.Img variant="top" src={image} />
                 <Card.Body>
                     <Card.Title>{name} by <Link>{creator}</Link></Card.Title>
@@ -26,7 +26,7 @@ const CourseDetails = () => {
                     }
                 </ListGroup>
                 <Card.Footer>
-                    <Link ><Button>Get Premium Access</Button></Link>
+                    <Link to={`/checkout/${id}`}><Button>Get Premium Access</Button></Link>
                 </Card.Footer>
             </Card>
         </Container>

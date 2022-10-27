@@ -4,11 +4,11 @@ Live Site Link: https://learning-platform-a10.web.app/
 
 Features and Functionalities:
 -------------------------------
-i) It is an educational website which offers some courses on internationally recognized tests.
-ii) You can see the details about the course by tapping the 'Details' button.
-iii) You can get premium access if you are logged in.
-iv) There are three different login systems, Google, Github and Email-Password login.
-v) You can create you new account with Google, Github or Email-Password.
+1) It is an educational website which offers some courses on internationally recognized tests.
+2) You can see the details about the course by tapping the 'Details' button.
+3) You can get premium access if you are logged in.
+4) There are three different login systems, Google, Github and Email-Password login.
+5) You can create you new account with Google, Github or Email-Password.
 
 List of Technologies used in this project:
 -------------------------------------------

@@ -19,6 +19,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/courses',
+                loader: () => fetch('https://learning-platform-server-weld.vercel.app/courses'),
                 element: <Courses></Courses>
             },
             {

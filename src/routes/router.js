@@ -8,6 +8,7 @@ import Home from "../components/Home/Home";
 import EmailLogin from "../components/Login/EmailLogin";
 import Login from "../components/Login/Login";
 import SignUp from "../components/Login/SignUp";
+import NotFound from "../components/NotFound/NotFound";
 import Main from "../layout/Main";
 import PrivateRoute from "./PrivateRoute";
 
@@ -54,6 +55,10 @@ export const router = createBrowserRouter([
                 path: '/checkout/:id',
                 loader: ({ params }) => fetch(`https://learning-platform-server-weld.vercel.app/checkout/${params.id}`),
                 element: <PrivateRoute><CheckOut></CheckOut></PrivateRoute>
+            },
+            {
+                path: '*',
+                element: <NotFound></NotFound>
             }
         ]
     }

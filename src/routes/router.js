@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Blog from "../components/Blog/Blog";
+import CourseDetails from "../components/Courses/CourseDetails";
 import Courses from "../components/Courses/Courses";
 import Faq from "../components/Faq/Faq";
 import Home from "../components/Home/Home";
@@ -41,6 +42,11 @@ export const router = createBrowserRouter([
             {
                 path: '/email-login',
                 element: <EmailLogin></EmailLogin>
+            },
+            {
+                path: '/courses/:id',
+                loader: ({ params }) => fetch(`https://learning-platform-server-weld.vercel.app/courses/${params.id}`),
+                element: <CourseDetails></CourseDetails>
             }
         ]
     }

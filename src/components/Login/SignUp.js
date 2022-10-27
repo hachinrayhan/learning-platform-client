@@ -8,26 +8,36 @@ import { AuthContext } from '../../contexts/AuthProvider';
 
 const SignUp = () => {
     const [message, setMessage] = useState('');
-    const { createUser } = useContext(AuthContext);
+    const { createUser, updateUserProfile, setLoading } = useContext(AuthContext);
 
     const handleSubmit = e => {
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
         const photoURL = form.photourl.value;
+        const profile = { displayName: name, photoURL: photoURL }
         const email = form.email.value;
         const password = form.password.value;
+        setMessage('');
 
         createUser(email, password)
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                updateUserProfile(profile)
+                    .then(() => { console.log('updated user') })
+                    .catch(error => {
+                        setMessage(error.message);
+                    })
                 setMessage('Congrats! Signup Successful');
                 form.reset();
             })
             .catch(error => {
                 console.error(error);
                 setMessage(error.message);
+            })
+            .finally(() => {
+                setLoading(false);
             })
     }
 

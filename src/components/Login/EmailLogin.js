@@ -1,16 +1,35 @@
 import React from 'react';
+import { useState } from 'react';
+import { useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthProvider';
 
 
 const EmailLogin = () => {
+    const { login } = useContext(AuthContext);
+    const [message, setMessage] = useState('');
+
     const handleSubmit = e => {
         e.preventDefault();
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password);
+        setMessage('');
+
+        login(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                setMessage('Congrats! Login Successful');
+                form.reset();
+            })
+            .catch(error => {
+                console.error(error);
+                setMessage(error.message);
+            })
     }
     return (
         <Form onSubmit={handleSubmit} className='container w-50 text-start mt-5 bg-success border rounded-2 p-4 fw-bold'>
@@ -24,7 +43,7 @@ const EmailLogin = () => {
                 <Form.Control name='password' type="password" placeholder="Password" required />
             </Form.Group>
             <Form.Text className="text-muted">
-                {/* <p className='text-danger'>{error}</p> */}
+                <p className='text-warning'>{message}</p>
             </Form.Text>
             {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
                 <Form.Check

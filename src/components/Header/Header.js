@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useContext } from 'react';
-import { Button, Image } from 'react-bootstrap';
+import { Image } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -67,16 +67,16 @@ const Header = () => {
                                                 <FaUser></FaUser>
                                         }
                                     </Link>
-                                    <Button onClick={logoutUser} className='mx-3 btn btn-primary btn-sm'>
+                                    <button onClick={logoutUser} className='mx-3 btn btn-primary btn-sm'>
                                         Logout
-                                    </Button>
+                                    </button>
                                 </div>
                                 :
                                 <div>
                                     <Link to={'/login'}>Login</Link>
                                 </div>
                         }
-                        <Button onClick={toggle} class="btn btn-light btn-sm mt-auto">{dark ? <MdOutlineLightMode /> : <MdDarkMode />}</Button>
+                        <button onClick={toggle} class="btn btn-light btn-sm mt-auto">{dark ? <MdOutlineLightMode className='fs-5' /> : <MdDarkMode className='fs-5' />}</button>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

@@ -6,6 +6,8 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { FaUser } from 'react-icons/fa';
+import { MdDarkMode, MdOutlineLightMode } from 'react-icons/md';
+
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 import logo from '../../images/logo.png';
@@ -65,7 +67,7 @@ const Header = () => {
                                                 <FaUser></FaUser>
                                         }
                                     </Link>
-                                    <Button onClick={logoutUser} className='mx-3' variant="secondary" size="sm">
+                                    <Button onClick={logoutUser} className='mx-3 btn btn-primary btn-sm'>
                                         Logout
                                     </Button>
                                 </div>
@@ -74,7 +76,7 @@ const Header = () => {
                                     <Link to={'/login'}>Login</Link>
                                 </div>
                         }
-                        <Button onClick={toggle}>{dark ? 'Light Mode' : 'Dark Mode'}</Button>
+                        <Button onClick={toggle} class="btn btn-light btn-sm mt-auto">{dark ? <MdOutlineLightMode /> : <MdDarkMode />}</Button>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

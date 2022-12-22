@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useContext } from 'react';
 import { Button, Image } from 'react-bootstrap';
@@ -13,11 +13,20 @@ import './Header.css';
 
 const Header = () => {
     const { user, logout } = useContext(AuthContext);
-    const [dark, setDark] = useState(true);
+    const [dark, setDark] = useState(false);
 
     const toggle = () => {
-        setDark(!dark)
+        setDark(!dark);
     }
+
+    useEffect(() => {
+        if (dark) {
+            document.body.className = 'dark';
+        }
+        else {
+            document.body.className = 'light';
+        }
+    }, [dark])
 
     const logoutUser = () => {
         logout()
